@@ -1,12 +1,15 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { ChevronDown, ChevronUp } from "../../icons";
-import { decrease, increase, removeItem } from "../../features/cart/cartSlice";
+import { addToShop, decrease, increase, removeItem } from "../../features/cart/cartSlice";
 
 const CartItem = props => {
-  const dispatch = useDispatch();
   const {id, img, title, price, amount} = props;
+  const {cartItems} = useSelector(state => state.cart);
+  const dispatch = useDispatch();
+
+  const targetItem = cartItems.filter(item => item.id === id);
 
   return (
     <article className="cart-item">
@@ -19,6 +22,7 @@ const CartItem = props => {
         <button
           className="remove-btn"
           onClick={() => {
+            dispatch(addToShop(targetItem[0]));
             dispatch(removeItem(id));
           }}
         >remove</button>
@@ -40,6 +44,7 @@ const CartItem = props => {
           className="amount-btn"
           onClick={() => {
             if (amount === 1) {
+              dispatch(addToShop(targetItem[0]));
               dispatch(removeItem(id));
               return;
             }

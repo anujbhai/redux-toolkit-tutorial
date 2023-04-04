@@ -2,22 +2,24 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CartContainer from "./components/CartContainer";
+import CartFooter from "./components/CartFooter";
 import Modal from "./components/Modal";
 import Navbar from "./components/Navbar";
-import { calculateTotals, getCartItems } from "./features/cart/cartSlice";
+import ShopContainer from "./components/ShopContainer";
+import { calculateTotals, getShopItems } from "./features/cart/cartSlice";
 
 function App() {
-  const {cartItems, isLoading} = useSelector(store => store.cart);
+  const {cartItems, shopItems, isLoading} = useSelector(store => store.cart);
   const {isOpen} = useSelector(store => store.modal);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(calculateTotals());
-  }, [cartItems, dispatch]);
+  }, [cartItems, shopItems, dispatch]);
 
   useEffect(() => {
-    dispatch(getCartItems());
-  }, []);
+    dispatch(getShopItems());
+  }, [dispatch]);
 
   if (isLoading) {
     return (
@@ -29,7 +31,9 @@ function App() {
     <main>
       {isOpen && <Modal />}
       <Navbar />
+      <ShopContainer />
       <CartContainer />
+      <CartFooter />
     </main>
   );
 }
