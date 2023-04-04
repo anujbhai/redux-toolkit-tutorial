@@ -307,3 +307,40 @@ hr {
   display: flex;
   justify-content: space-around;
 }
+
+/*
+=============== 
+Shop
+===============
+*/
+.shop {
+  /* min-height: calc(100vh - 120px); */
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 2.5rem 0;
+  max-width: var(--fixed-width);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.shop-card {
+  border: 1px solid #DDDDDD;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  min-width: 300px;
+}
+.shop-card img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+}
+.shop-card figcaption {
+  text-align: center;
+}
+
